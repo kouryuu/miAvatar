@@ -1,27 +1,22 @@
 #drawer{
-border: solid black 3px;
+
 width: 700px;
 height: 100px;
 margin-top: 50px;
+background-image: url('drawer.png');
 }
 .ropa{
 	width: 80px;
 	height: 80px;
 	margin-top: 5px;
 	margin-left: 10px;
-	border: solid black 3px;
+	/*border: solid black 3px;*/
 	position: relative;
 
 	display: inline-block;
 
 }
-#cabello_negro{
-		
-	width: 80px;
-	height: 80px;
-		position: absolute;
-		background-color: red;
-}
+
 .prenda{
 	position: absolute;
 	display: none;
@@ -31,4 +26,7 @@ margin-top: 50px;
 position: absolute !important;
 top: 0px !important;
 left: 0px !important;
+}
+body{
+	background-image: url('default-background.png');
 }

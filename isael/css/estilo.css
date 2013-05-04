@@ -1,0 +1,28 @@
+body{
+	background-color: blue;
+}
+#contenedor{
+	text-align: center;
+	margin: 0 auto;
+	width: 80%;
+	height: 100%;
+	background-color: red;
+}
+.importante{
+	text-align: center;
+	margin: 0 auto;
+	width: 700px !important;
+	height: 50%;
+	background-color: white;
+	padding: 20px 0px 30px 0px;
+}
+.logo{
+	text-align: center;
+	width: 400px;
+	height: 100px;
+	padding: 20px 20px 20px 20px;
+}
+.inicia{
+	width: 20%;
+	padding: 20px 20px 20px 20px;
+}

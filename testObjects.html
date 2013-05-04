@@ -1,0 +1,63 @@
+<html>
+<head>
+<script src="js/jquery.js"></script>
+</head>
+<body>
+
+
+<div tipoderopa="cabello" id="cabello_negro" >
+
+	</div>
+
+<script language="javascript">
+path_monitos='Monitos/hombre/';
+// constructor de monito
+function monito(cabello,torso,piernas,zapatos){
+	this.cabello = cabello;
+	this.torso = torso;
+	this.piernas = piernas;
+	this.zapatos = zapatos;
+}
+
+// Creamos un monito actual
+
+monito_actual = {cabello:'none',torso:'none',piernas:'none',zapatos:'none'};
+/*
+*	agregaPrenda
+*   @prenda es el id de la div tipo prenda
+*/
+function agregaPrenda(prenda){
+tipo = $('#'+prenda).attr('tipoderopa');
+switch(tipo){
+	case 'cabello':
+	monito_actual.cabello = prenda;
+	$('#'+prenda).hide('slow');
+	$('#cabello').attr('src',path_monitos+prenda+'.svg');
+	break;
+	case 'torso':
+	monito_actual.torso = prenda;
+	$('#'+prenda).hide('slow');
+	$('#torso').attr('src',path_monitos+prenda+'.svg');
+	break;
+	case 'piernas':
+	monito_actual.piernas = prenda;
+	$('#'+prenda).hide('slow');
+	$('#piernas').attr('src',path_monitos+prenda+'.svg');
+	break;
+	case 'zapatos':
+	monito_actual.zapatos = prenda;
+	$('#'+prenda).hide('slow');
+	$('#zapatos').attr('src',path_monitos+prenda+'.svg');
+	break
+}
+
+}
+
+
+agregaPrenda('cabello_negro');
+
+
+
+</script>
+</body>
+</html>

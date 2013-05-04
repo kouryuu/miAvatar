@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<title>Prueba Touch </title>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+<script type="text/javascript" src="js/hammer.js" ></script>
+<link rel="apple-touch-startup-image"href="ios-start.png">
+<link rel="apple-touch-icon" href="ios-icon.png"/>
+<script src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.hammer.js" ></script>
+<script type="text/javascript" src="js/modernizr.js" ></script>
+<script>
+
+//alert(window.navigator.standalone);
+
+
+</script>
+<script text="text/javascript">
+path_monitos='Monitos/hombre/';
+
+// constructor de monito
+function monito(cabello,torso,piernas,zapatos){
+    this.cabello = cabello;
+    this.torso = torso;
+    this.piernas = piernas;
+    this.zapatos = zapatos;
+}
+
+// Creamos un monito actual
+
+monito_actual = {cabello:'none',torso:'none',piernas:'none',zapatos:'none'};
+/*
+*   agregaPrenda
+*   @prenda es el id de la div tipo prenda
+*/
+function agregaPrenda(prenda){
+
+tipo = $('#'+prenda).attr('tipoderopa');
+ console.log(tipo);
+switch(tipo){
+    case 'cabello':
+    monito_actual.cabello = prenda;
+    $('#'+prenda).hide('slow');
+    $('#cabello').attr('src',path_monitos+prenda+'_monito.png');
+    break;
+    case 'torso':
+    monito_actual.torso = prenda;
+    $('#'+prenda).hide('slow');
+    $('#torso').attr('src',path_monitos+prenda+'_monito.png');
+    break;
+    case 'piernas':
+    monito_actual.piernas = prenda;
+    $('#'+prenda).hide('slow');
+    $('#piernas').attr('src',path_monitos+prenda+'_monito.png');
+    break;
+    case 'zapatos':
+    monito_actual.zapatos = prenda;
+    $('#'+prenda).hide('slow');
+    $('#zapatos').attr('src',path_monitos+prenda+'_monito.png');
+    break
+}
+
+}
+
+function start(){
+
+	var hm = Hammer($("#drawer")).on("swiperight",function(event){mueveUno('izq');});
+    var hm2 = Hammer($("#drawer")).on("swipeleft",function(event){mueveUno('der');});
+	
+    var hammertime = Hammer($("#ropa1")).on("hold",function(event){
+        ponerImagen('playera_sheldon','torso')});
+    var hammertime2 = Hammer($("#ropa2")).on("hold",function(event){
+        ponerImagen('mesclilla_azul','piernas')});
+var hammertime3 = Hammer($("#ropa3")).on("hold",function(event){
+        ponerImagen('','')});
+var hammertime4 = Hammer($("#ropa4")).on("hold",function(event){
+        ponerImagen('','')});
+var hammertime5 = Hammer($("#ropa5")).on("hold",function(event){
+        ponerImagen('','')});
+var hammertime6 = Hammer($("#ropa6")).on("hold",function(event){
+        ponerImagen('','')});
+
+
+ function ponerImagen(imagen,tipoderopa){
+    $(".prenda").show();
+
+    $(".prenda").attr("tipoderopa",tipoderopa);
+    $(".prenda").attr("src",path_monitos+imagen+'.png');
+    $(".prenda").attr("id",imagen);
+ }
+
+$(".prenda")
+            .hammer({ drag_max_touches:0})
+            .on("touch drag", function(ev) {
+
+                var touches = ev.gesture.touches;
+
+                ev.gesture.preventDefault();
+
+                for(var t=0,len=touches.length; t<len; t++) {
+                
+                if(touches[t].pageX>456 && touches[t].pageX<656 && touches[t].pageY>500 ){
+
+
+                	agregaPrenda (this.getAttribute('id'));
+                	
+                }
+                
+                    var target = $(touches[t].target);
+                    target.css({
+                        zIndex: 1337,
+                        left: touches[t].pageX-135,
+                        top: touches[t].pageY-148
+                    });
+                }
+            });	 
+}
+
+function cambiarRopa(){
+
+
+}
+var ultimo = $('.ropa').last();
+function mueveUno(direccion){
+if(direccion == 'izq'){
+$('.ropa').animate({
+    left: '+=80'
+},100);
+
+ultimo.hide();
+var ultimo = ultimo.prev();
+}if(direccion == 'der'){
+$('.ropa').animate({
+    left: '-=80'
+},100);
+
+}
+
+}
+
+
+function showColors(){
+
+
+
+  }
+
+
+
+</script>
+
+
+</head>
+<body onload="start();" >
+
+<div id="drawer" >
+
+<img src="/touch/Monitos/hombre/playera_sheldon.png"   class="ropa" id="ropa1" />
+<img src="/touch/Monitos/hombre/mesclilla_azul.png"   class="ropa" id="ropa2" />
+
+    
+    
+    <div id="ropa3" class="ropa" ></div>
+    <div id="ropa4" class="ropa" ></div>
+    <div id="ropa5" class="ropa" ></div>
+    <div id="ropa6" class="ropa" ></div>
+    <div id="ropa7" class="ropa" ></div>
+<div id="imgropa">
+
+<img tipoderopa="piernas" src="/touch/Monitos/hombre/mesclilla_azul.png"  id="default"  class="prenda"  />
+</div>
+	</div>
+
+    
+    </div>
+
+
+
+
+<div style="position:absolute;border:solid black 1px;height:150px;width:200px;left:456px;top:500px" id="cuerpo">
+<img id="cabello" src="Monitos/hombre/cabello.png" height="150px" width="200px"/>
+<img id="torso" src="Monitos/hombre/torso.png" height="150px" width="200px"/>
+<img id="piernas" src="Monitos/hombre/piernas.png" height="150px" width="200px"/>
+<img id="zapatos" src="Monitos/hombre/zapatos.png" height="150px" width="200px"/>
+</div>
+
+
+
+
+</body>
+
+
+
+</html>

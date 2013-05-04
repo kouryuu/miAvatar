@@ -1,0 +1,165 @@
+<html>
+<head>
+<script src=”http://code.jquery.com/jquery-1.7.2.min.js”></script>
+<script src=”http://eightmedia.github.com/hammer.js/hammer.js”></script>
+
+<script type=”text/javascript”>
+
+$(document).ready(function () {
+
+var logDetailsDiv = document.getElementById(“logDetails”);
+
+var el = document.getElementById(‘box’);
+
+var hammer = new Hammer(el, {
+drag_min_distance: 50,
+drag_horizontal: true,
+drag_vertical: true,
+transform: true,
+scale_treshold: 0.1,
+hold: true,
+hold_timeout: 400,
+swipe: true,
+swipe_time: 200, // ms
+swipe_min_distance: 20, // pixels
+prevent_default: true
+});
+
+var drag = {};
+var container_size = el.getBoundingClientRect();
+var drag_el;
+var drag_el_size = {};
+var drag_timer;
+var drag_pos = {};
+var zIndex = 10;
+
+var touchOffsetx = 0;
+var touchOffsety = 0;
+
+hammer.ontap = function (ev) {
+var touches = ev.originalEvent.touches || [ev.originalEvent];
+for (var t = 0; t < ev.touches.length; t++) {
+var el = touches[t].target;
+if (el.className.search(‘box’) > -1) {
+el.style.zIndex = zIndex++;
+}
+}
+};
+
+hammer.ondrag = function (ev) {
+drag = [];
+var touches = ev.originalEvent.touches || [ev.originalEvent];
+for (var t = 0; t < touches.length; t++) {
+var el = touches[t].target;
+
+if (el && el.className.search(‘box’) > -1) {
+var offsetwidth = $(‘#box’).width();
+var offsetheight = $(‘#box’).width();
+log(offsetwidth + “:” + offsetheight)
+drag.push({
+el: el,
+size: { width: offsetwidth, height: offsetheight },
+pos: ev.touches[t]
+});
+}
+}
+};
+
+setInterval(watchDrag, 10);
+
+function watchDrag() {
+if (!drag.length) {
+return;
+}
+
+for (var d = 0; d < drag.length; d++) {
+var left = drag[d].pos.x – (drag[d].size.width / 2) – touchOffsetx;
+var top = drag[d].pos.y – (drag[d].size.height / 2);
+
+if (left < 0) {
+left = 0;
+}
+if (top < 0) {
+top = 0;
+}
+
+drag[d].el.style.left = left + ‘px’;
+drag[d].el.style.top = top + ‘px’;
+}
+}
+
+hammer.onswipe = function (ev) {
+if (ev.direction == ‘right’) {
+log(“swipeRight” + $(‘#cont’).width() + ‘px’);
+$(‘#box’).attr(“Left”, $(‘#cont’).width() + ‘px’);
+}
+if (ev.direction == ‘left’) {
+log(“swipeLeft” + $(‘#cont’).width() + ‘px’);
+$(‘#box’).attr(“Left”, ’0′ + ‘px’);
+}
+
+}
+hammer.ondoubletap = function (ev) {
+var width = $(‘#box’).width();
+log(“touchOffset =” + width);
+
+width = width * (1.2);
+$(‘#box’).width(width);
+
+var height = $(‘#box’).height();
+log(“touchOffset =” + width);
+
+height = height * (1.2);
+$(‘#box’).height(height);
+};
+
+hammer.onhold = function (ev) {
+var width = $(‘#box’).width();
+log(“touchOffset =” + width);
+
+width = width * (0.85);
+$(‘#box’).width(width);
+
+var height = $(‘#box’).height();
+log(“touchOffset =” + width);
+
+height = height * (0.85);
+$(‘#box’).height(height);
+
+};
+
+hammer.ontransformstart = function (ev) { };
+var oldScale = 0.0;
+hammer.ontransform = function (ev) {
+
+var width = $(‘#box’).width();
+var height = $(‘#box’).height();
+var scale = 1 + ev.scale – oldScale;
+log(“scale =” + scale);
+
+width = width * (scale);
+$(‘#box’).width(width);
+
+height = height * (scale);
+$(‘#box’).height(height);
+oldScale = ev.scale;
+};
+
+hammer.ontransformend = function (ev) {
+
+};
+});
+
+function log(text) {
+document.getElementById(“log”).innerHTML = text;
+}
+</script>
+</head>
+<body>
+<div id=”cont” style=”height:250px”>
+<div id=”log”> log me</div>
+<div id=”logDetails”></div>
+<div id=”box” style=”left:200px;height:225px;width:225px;background:red;position:absolute;” ></div>
+</div>
+</body>
+</html>

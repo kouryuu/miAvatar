@@ -1,15 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Miavatar</title>
+    <title>Hammer.js</title>
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="apple-mobile-web-app-capable" content="yes"/>
-	<meta name="apple-mobile-web-app-status-bar" content="black"/>
-	<link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
-	<link href="bootstrap/css/bootstrap.css" rel="stylesheet" />
-	<link href="css/estilo.css" rel="stylesheet" />
     <style>
 
         html, body, #carousel, #carousel ul, #carousel li {
@@ -31,6 +25,7 @@
         }
 
         #carousel {
+            background: silver;
             overflow: hidden;
             width:100%;
             -webkit-backface-visibility: hidden;
@@ -80,6 +75,12 @@
             text-shadow: -1px -1px 0 rgba(0,0,0,.2);
         }
 
+        #carousel li.pane1 { background: #42d692; }
+        #carousel li.pane2 { background: #4986e7; }
+        #carousel li.pane3 { background: #d06b64; }
+        #carousel li.pane4 { background: #cd74e6; }
+        #carousel li.pane5 { background: #9fe1e7; }
+
     </style>
 </head>
 
@@ -89,149 +90,20 @@
 
     <div id="carousel">
         <ul>
-            <li class="pane1">
-				<div id="contenedor">
-					<img class="logo" src="repo/logo_MiAvatar.png">
-					<br/>
-					<br/>
-					<div class="importante">		
-	
-						<div class="row">
-							<div class="span3">
-								<h3>Seleciona</h3>
-								<img src="repo/imagenSelecciona.jpg">
-								Selecciona el sexo de tu avatar.
-								De eso dependerá que tipo de
-								prendas puede usar.
-							</div>
-							<div class="span3">
-								<h3>Modifica</h3>
-								<img src="repo/imagenModifica.jpg">
-								Modifica los articulos del
-								avatar así como el lugar en
-								donde está.
-							</div>
-							<div class="span3">
-								<h3>Guarda</h3>
-								<img src="repo/imagenGuarda.jpg">
-								Guarda tu creación de formas
-								distintas. Hay opción a color y
-								para colorear.
-							</div>
-						</div>
-	
-					</div>
-					<div style="padding: 50px 20px 20px 20px;">
-					<button id="inicia" class="btn btn-large btn-info"><font size="7">Inicia</font></button>
-					</div>
-				</div>	
-			
-			</li>
-            <li class="pane2">
-
-				<div class="row">
-					<div class="span4">
-						<img src="repo/logo_MiAvatar.png" width="80%" height="60%">
-					</div>
-					<div class="span2">
-						<img src="repo/botones/atras.png" id="atrasSelecciona">
-					</div>
-					<div class="span1">
-					</div>
-					<div class="span2">
-						<img src="repo/botones/adelanteOn.png" id="adelanteSelecciona">
-					</div>
-					<div class="span1 offset2">
-						<img src="repo/botones/ayuda.gif" id="ayudaSelecciona">
-					</div>
-				</div>
-
-				<!-- Aqui va la seleccion de sexo del avatar -->
-
-				<div class="titulo">
-					Selecciona el sexo de tu avatar
-				</div>
-
-				<div class="sexo">
-					<img src="repo/botones/macho.png" id="sexoMasculino">
-					<img src="repo/botones/hembra.png" id="sexoFemenino">
-				</div>
-
-
-			</li>
-            <li class="pane3">				
-				
-				<div class="row">
-					<div class="span4">
-						<img src="repo/logo_MiAvatar.png" width="80%" height="60%">
-					</div>
-					<div class="span2">
-						<img src="repo/botones/atras.png" id="atrasModifica">
-					</div>
-					<div class="span1">
-						<!-- Aqui va el simbolo del sexo -->
-					</div>
-					<div class="span2">
-						<img src="repo/botones/adelanteOn.png" id="adelanteModifica">
-					</div>
-					<div class="span1 offset2">
-						<img src="repo/botones/ayuda.gif" id="ayudaSelecciona">
-					</div>
-				</div>
-
-				<!-- Aqui va la modificacion del avatar -->
-
-				<div class="titulo">
-					Modifica al avatar
-				</div>
-
-				<div>
-					
-				</div>
-
-
-			</li>
-            <li class="pane4">
-				
-
-				<div class="row">
-					<div class="span4">
-						<img src="repo/logo_MiAvatar.png" width="80%" height="60%">
-					</div>
-					<div class="span2">
-						<img src="repo/botones/atras.png" id="atrasGuarda">
-					</div>
-					<div class="span1">
-						<!-- Aqui va el simbolo del sexo -->
-					</div>
-					<div class="span2">
-						<!-- Aqui ya no hay boton de siguiente -->
-					</div>
-					<div class="span1 offset2">
-						<img src="repo/botones/ayuda.gif" id="ayudaSelecciona">
-					</div>
-				</div>
-
-
-				<!-- Aqui va la pantalla de guardar -->
-	
-				<div class="titulo">
-					Guarda tu avatar
-				</div>
-
-				<div>
-					
-				</div>
-
-			</li>
+            <li class="pane1"><h2>Swipe...</h2></li>
+            <li class="pane2"><h2>...or drag...</h2></li>
+            <li class="pane3"><h2>...or swipe...</h2></li>
+            <li class="pane4"><h2>..or drag...</h2></li>
+            <li class="pane5"><h2>Dit is het einde!</h2></li>
         </ul>
     </div>
 
 
+    <!-- jQuery is just for the demo! Hammer.js works without jQuery :-) -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <script src="hammer.js-1.0.5/examples/assets/js/modernizr.js"></script>
+    <script src="assets/js/modernizr.js"></script>
 
-    <script src="hammer.js-1.0.5/dist/jquery.hammer.js"></script>
+    <script src="../dist/jquery.hammer.js"></script>
 
     <script>
 
@@ -349,42 +221,67 @@
         this.next = function() { return this.showPane(current_pane+1, true); };
         this.prev = function() { return this.showPane(current_pane-1, true); };
 
+
+
+        function handleHammer(ev) {
+            console.log(ev);
+            // disable browser scrolling
+            ev.gesture.preventDefault();
+
+            switch(ev.type) {
+                case 'dragright':
+                case 'dragleft':
+                    // stick to the finger
+                    var pane_offset = -(100/pane_count)*current_pane;
+                    var drag_offset = ((100/pane_width)*ev.gesture.deltaX) / pane_count;
+
+                    // slow down at the first and last pane
+                    if((current_pane == 0 && ev.gesture.direction == Hammer.DIRECTION_RIGHT) ||
+                        (current_pane == pane_count-1 && ev.gesture.direction == Hammer.DIRECTION_LEFT)) {
+                        drag_offset *= .4;
+                    }
+
+                    setContainerOffset(drag_offset + pane_offset);
+                    break;
+
+                case 'swipeleft':
+                    self.next();
+                    ev.gesture.stopDetect();
+                    break;
+
+                case 'swiperight':
+                    self.prev();
+                    ev.gesture.stopDetect();
+                    break;
+
+                case 'release':
+                    // more then 50% moved, navigate
+                    if(Math.abs(ev.gesture.deltaX) > pane_width/2) {
+                        if(ev.gesture.direction == 'right') {
+                            self.prev();
+                        } else {
+                            self.next();
+                        }
+                    }
+                    else {
+                        self.showPane(current_pane, true);
+                    }
+                    break;
+            }
+        }
+
+        element.hammer({ drag_lock_to_axis: true })
+            .on("release dragleft dragright swipeleft swiperight", handleHammer);
     }
 
 
     var carousel = new Carousel("#carousel");
     carousel.init();
 
-	window.onload= function(){
- 	var objeto= document.getElementById("inicia");
-	 objeto.onclick= function(){
-	  carousel.next();
-	 }
- 	var objeto1= document.getElementById("atrasSelecciona");
-	 objeto1.onclick= function(){
-	  carousel.prev();
-	 }
- 	var objeto2= document.getElementById("adelanteSelecciona");
-	 objeto2.onclick= function(){
-	  carousel.next();
-	 }
- 	var objeto3= document.getElementById("atrasModifica");
-	 objeto3.onclick= function(){
-	  carousel.prev();
-	 }
- 	var objeto4= document.getElementById("adelanteModifica");
-	 objeto4.onclick= function(){
-	  carousel.next();
-	 }
- 	var objeto5= document.getElementById("atrasGuarda");
-	 objeto5.onclick= function(){
-	  carousel.prev();
-	 }
-	}
-   </script>
 
+    </script>
+
+    <script src="assets/js/ga.js"></script>
 
 </body>
 </html>
-
-

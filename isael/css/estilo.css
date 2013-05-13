@@ -1,5 +1,5 @@
 body{
-	//background-image: url('../repo/fondo_avatar.png') !important;
+	//background-image: url('../repo/fondo_avatar.jpg') !important;
 	//background-attachment: fixed;
 	//background-repeat: no-repeat;
 	background: url(../repo/fondo_avatar.png) no-repeat center center fixed;
@@ -53,4 +53,13 @@ body{
 .sexo{
 	padding: 20px 20px 20px 20px;
 	text-align: center;
+}
+.ventanaFlotante{
+    height: 100%;
+	width: 100%;
+	position: relative;
+	visibility: visible;
+	text-align: center;
+	background-color: #bbbbbb
+	z-index: 15;
 }

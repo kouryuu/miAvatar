@@ -10,6 +10,7 @@
 	<link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
 	<link href="bootstrap/css/bootstrap.css" rel="stylesheet" />
 	<link href="css/estilo.css" rel="stylesheet" />
+
     <style>
 
         html, body, #carousel, #carousel ul, #carousel li {
@@ -89,6 +90,7 @@
 
     <div id="carousel">
         <ul>
+			<!-- Pantalla de inicio -->
             <li class="pane1">
 				<div id="contenedor">
 					<img class="logo" src="repo/logo_MiAvatar.png">
@@ -127,6 +129,7 @@
 				</div>	
 			
 			</li>
+			<!-- Pantalla de seleccion -->
             <li class="pane2">
 
 				<div class="row">
@@ -159,6 +162,7 @@
 
 
 			</li>
+			<!-- Pantalla de modificacion -->
             <li class="pane3">				
 				
 				<div class="row">
@@ -170,27 +174,28 @@
 					</div>
 					<div class="span1">
 						<!-- Aqui va el simbolo del sexo -->
+						<img src="" id="sexoModifica" width=60 height=90>
 					</div>
 					<div class="span2">
 						<img src="repo/botones/adelanteOn.png" id="adelanteModifica">
 					</div>
 					<div class="span1 offset2">
-						<img src="repo/botones/ayuda.gif" id="ayudaSelecciona">
+						<img src="repo/botones/ayuda.gif" id="ayudaModifica">
 					</div>
 				</div>
-
-				<!-- Aqui va la modificacion del avatar -->
 
 				<div class="titulo">
 					Modifica al avatar
 				</div>
 
 				<div>
-					
+					<!-- Aqui va la modificacion del avatar -->
+
 				</div>
 
 
 			</li>
+			<!-- Pantalla de guardado-->
             <li class="pane4">
 				
 
@@ -202,25 +207,27 @@
 						<img src="repo/botones/atras.png" id="atrasGuarda">
 					</div>
 					<div class="span1">
-						<!-- Aqui va el simbolo del sexo -->
+						<img src="" id="sexoGuarda" width=60 height=90>
 					</div>
 					<div class="span2">
 						<!-- Aqui ya no hay boton de siguiente -->
 					</div>
 					<div class="span1 offset2">
-						<img src="repo/botones/ayuda.gif" id="ayudaSelecciona">
+						<img src="repo/botones/ayuda.gif" id="ayudaGuarda">
 					</div>
 				</div>
 
-
-				<!-- Aqui va la pantalla de guardar -->
-	
 				<div class="titulo">
 					Guarda tu avatar
 				</div>
-
+				<div id="preview">
+					<!-- Aqui va la pantalla de guardar -->
+Imagen de prueba, aun necesita actualizarse
+<br>
+<img src='repo/imagenSelecciona1.jpg'>
+				</div>
 				<div>
-					
+					<button class="btn btn-large btn-info" name="imprimir" onclick="imprimePreview();" >imprimir</button>
 				</div>
 
 			</li>
@@ -232,6 +239,29 @@
     <script src="hammer.js-1.0.5/examples/assets/js/modernizr.js"></script>
 
     <script src="hammer.js-1.0.5/dist/jquery.hammer.js"></script>
+
+	<!-- Bloquea la pantalla verticalmente, i.e. quita el efecto "rebote" -->
+<script type="text/javascript">
+$(document).bind(
+  'touchmove',
+  function(e) {
+    e.preventDefault();
+  }
+);
+</script>
+
+	<!-- Imprime lo que contenga el area de preview -->
+
+<script type="text/javascript">
+function imprimePreview(){
+	var ficha=document.getElementById('preview');
+	var ventimp=window.open(' ','popimpr');
+	ventimp.document.write(ficha.innerHTML);
+	ventimp.document.close();
+	ventimp.print();
+	ventimp.close();
+}
+</script>
 
     <script>
 
@@ -364,22 +394,58 @@
 	 objeto1.onclick= function(){
 	  carousel.prev();
 	 }
- 	var objeto2= document.getElementById("adelanteSelecciona");
-	 objeto2.onclick= function(){
-	  carousel.next();
-	 }
+ 	var adelanteSel= document.getElementById("adelanteSelecciona");
+	 adelanteSel.src='repo/botones/adelanteOff.png';
+
  	var objeto3= document.getElementById("atrasModifica");
 	 objeto3.onclick= function(){
 	  carousel.prev();
 	 }
- 	var objeto4= document.getElementById("adelanteModifica");
-	 objeto4.onclick= function(){
+ 	var adelanteMod= document.getElementById("adelanteModifica");
+	 adelanteMod.onclick= function(){
 	  carousel.next();
 	 }
+
  	var objeto5= document.getElementById("atrasGuarda");
 	 objeto5.onclick= function(){
 	  carousel.prev();
 	 }
+
+	/* Acá se define la función onclick tanto para el hombre como para la mujer */
+
+	var masculino= document.getElementById("sexoMasculino");
+	 masculino.onclick= function(){
+		//Se actualizan los iconos de sexo de las siguientes pantallas
+	  document.getElementById('sexoModifica').src='repo/botones/macho.png';
+	  document.getElementById('sexoGuarda').src='repo/botones/macho.png';
+
+		//Se activa el botón de siguiente en la pantalla de seleccion, previamente desactivada su función
+	  adelanteSel.src='repo/botones/adelanteOn.png';
+      adelanteSel.onclick=function(){
+	  	carousel.next();
+	  }
+
+	  carousel.next();
+	 }
+	var femenino= document.getElementById("sexoFemenino");
+	 femenino.onclick= function(){
+		//Se actualizan los iconos de sexo de las siguientes pantallas
+	  document.getElementById('sexoModifica').src='repo/botones/hembra.png';
+	  document.getElementById('sexoGuarda').src='repo/botones/hembra.png';
+	  
+		//Se activa el botón de siguiente en la pantalla de seleccion, previamente desactivada su función
+	  adelanteSel.src='repo/botones/adelanteOn';
+      adelanteSel.onclick=function(){
+	  	carousel.next();
+	  }
+
+	  carousel.next();
+	 }
+
+	var ayudaSel=document.getElementById("ayudaSeleciona");
+	var ayudaMod=document.getElementById("ayudaModifica");
+	var ayudaGua=document.getElementById("ayudaGuarda");
+
 	}
    </script>
 
